@@ -1,1 +1,48 @@
 
+// Load axios module
+const axios = require('axios');
+
+// This function is exported as the default function for the API endpoint.
+// It will be triggered when someone sends a request to /api/generate-prompts.
+module.exports = async (req, res) => {
+  // Allow only POST requests
+  if (req.method !== 'POST') {
+    res.status(405).json({ message: "Method Not Allowed" });
+    return;
+  }
+
+  // Extract the user's input from the request body
+  const { userInput } = req.body;
+  if (!userInput) {
+    res.status(400).json({ success: false, message: "Input is required" });
+    return;
+  }
+
+  try {
+    // Call OpenAI's API to generate prompts
+    const response = await axios.post(
+      'https://api.openai.com/v1/completions',
+      {
+        model: 'text-davinci-003',
+        prompt: `Generate creative writing prompts based on: ${userInput}`,
+        max_tokens: 150,
+      },
+      {
+        headers: {
+          'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`, // Your API key set as an environment variable
+        },
+      }
+    );
+
+    // Parse and clean up the prompts
+    const prompts = response.data.choices[0].text
+      .split("\n")
+      .map(prompt => prompt.trim())
+      .filter(Boolean);
+
+    res.status(200).json({ success: true, prompts });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ success: false, message: "Error generating prompts" });
+  }
+};
