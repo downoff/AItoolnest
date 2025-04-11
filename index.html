@@ -1,98 +1,95 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Toolnest</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f9;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-        }
-        .container {
-            background: #fff;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            padding: 20px;
-            width: 90%;
-            max-width: 600px;
-            text-align: center;
-        }
-        input, button {
-            padding: 10px;
-            font-size: 16px;
-            margin: 10px;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-        }
-        button {
-            background-color: #007BFF;
-            color: white;
-            cursor: pointer;
-        }
-        button:hover {
-            background-color: #0056b3;
-        }
-        .output {
-            margin-top: 20px;
-            padding: 10px;
-            background-color: #f0f0f0;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Toolnest.ai - Your AI Tool Hub</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f9;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    header {
+      width: 100%;
+      background-color: #2d3b47;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+    .container {
+      padding: 20px;
+      max-width: 800px;
+      width: 100%;
+    }
+    h1, h2 {
+      margin: 0 0 15px;
+    }
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+    li {
+      background: #fff;
+      margin: 10px 0;
+      padding: 15px;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    a {
+      text-decoration: none;
+      color: #007BFF;
+    }
+    footer {
+      margin-top: 40px;
+      padding: 20px;
+      text-align: center;
+      background-color: #2d3b47;
+      color: white;
+      width: 100%;
+    }
+  </style>
 </head>
 <body>
 
-    <div class="container">
-        <h1>AI Toolnest</h1>
-        <p>Enter a topic to generate AI prompts:</p>
-        
-        <input type="text" id="userInput" placeholder="Enter a topic">
-        <button id="generateBtn">Generate Prompts</button>
-        
-        <div id="output" class="output"></div>
-    </div>
+  <header>
+    <h1>Toolnest.ai</h1>
+    <p>Your hub for the best AI tools</p>
+  </header>
 
-    <script>
-        document.getElementById('generateBtn').addEventListener('click', async () => {
-            const userInput = document.getElementById('userInput').value;
-            const outputDiv = document.getElementById('output');
+  <div class="container">
+    <h2>Featured AI Tools</h2>
+    <ul>
+      <li>
+        <strong>ChatGPT</strong> – An advanced conversational AI by OpenAI.
+        <br>
+        <a href="https://chat.openai.com" target="_blank">Visit ChatGPT</a>
+      </li>
+      <li>
+        <strong>Copy.ai</strong> – AI-powered content generation for marketing and copywriting.
+        <br>
+        <a href="https://www.copy.ai" target="_blank">Visit Copy.ai</a>
+      </li>
+      <li>
+        <strong>Jasper</strong> – AI content assistant for writing blog posts, social media, and more.
+        <br>
+        <a href="https://www.jasper.ai" target="_blank">Visit Jasper</a>
+      </li>
+      <li>
+        <strong>Remove.bg</strong> – Automatically remove image backgrounds using AI.
+        <br>
+        <a href="https://www.remove.bg" target="_blank">Visit Remove.bg</a>
+      </li>
+    </ul>
+  </div>
 
-            if (!userInput.trim()) {
-                outputDiv.innerHTML = "Please enter a topic!";
-                return;
-            }
-
-            outputDiv.innerHTML = "Loading...";
-
-            try {
-                const response = await fetch('https://a-itoolnest-backend-5q7nxxo22-downoffs-projects.vercel.app/generate-prompts', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({ userInput })
-                });
-
-                const data = await response.json();
-
-                if (data.success && data.prompts.length > 0) {
-                    outputDiv.innerHTML = "<ul>" + data.prompts.map(prompt => `<li>${prompt}</li>`).join('') + "</ul>";
-                } else {
-                    outputDiv.innerHTML = "No prompts found. Please try again!";
-                }
-            } catch (error) {
-                outputDiv.innerHTML = "Error generating prompts. Please try again!";
-            }
-        });
-    </script>
+  <footer>
+    <p>&copy; 2025 Toolnest.ai. All Rights Reserved.</p>
+  </footer>
 
 </body>
 </html>
