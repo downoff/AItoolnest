@@ -1,53 +1,98 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Toolnest.ai - AI Tool Aggregator</title>
-  <style>
-    body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #f4f4f9; color: #333; }
-    header { background: #2d3b47; color: white; padding: 20px; text-align: center; }
-    h1 { margin: 0; }
-    section { padding: 20px; }
-    footer { text-align: center; padding: 10px; background: #2d3b47; color: white; }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Toolnest</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+        .container {
+            background: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            width: 90%;
+            max-width: 600px;
+            text-align: center;
+        }
+        input, button {
+            padding: 10px;
+            font-size: 16px;
+            margin: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        button {
+            background-color: #007BFF;
+            color: white;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .output {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+    </style>
 </head>
 <body>
 
-  <header>
-    <h1>Welcome to Toolnest.ai</h1>
-    <p>Your hub for the best AI tools.</p>
-  </header>
+    <div class="container">
+        <h1>AI Toolnest</h1>
+        <p>Enter a topic to generate AI prompts:</p>
+        
+        <input type="text" id="userInput" placeholder="Enter a topic">
+        <button id="generateBtn">Generate Prompts</button>
+        
+        <div id="output" class="output"></div>
+    </div>
 
-  <section>
-    <h2>Explore Free AI Tools & Prompts</h2>
-    <p>Start using AI tools for your business, writing, and more. We offer a wide range of free prompts to get you started.</p>
-    <a href="#free-prompt-section" style="text-decoration: none; color: white; background-color: #007BFF; padding: 10px 15px; border-radius: 5px;">Explore Free Prompts</a>
-  </section>
+    <script>
+        document.getElementById('generateBtn').addEventListener('click', async () => {
+            const userInput = document.getElementById('userInput').value;
+            const outputDiv = document.getElementById('output');
 
-  <section id="free-prompt-section">
-    <h3>Free Prompts:</h3>
-    <ul>
-      <li>AI Writing Prompts for Creators</li>
-      <li>Business Copy Prompts</li>
-      <li>Design Inspiration Prompts</li>
-    </ul>
-  </section>
+            if (!userInput.trim()) {
+                outputDiv.innerHTML = "Please enter a topic!";
+                return;
+            }
 
-  <!-- New Subscription Section -->
-  <section>
-    <h2>Subscribe for Updates</h2>
-    <p>Stay updated with the latest AI tools, free prompts, and more!</p>
-    <form action="submit_form.php" method="POST">
-      <label for="email">Enter your email:</label>
-      <input type="email" id="email" name="email" required>
-      <button type="submit" style="background-color: #28a745; color: white; padding: 10px 15px; border: none; border-radius: 5px;">Subscribe</button>
-    </form>
-  </section>
+            outputDiv.innerHTML = "Loading...";
 
-  <footer>
-    <p>&copy; 2025 Toolnest.ai - All Rights Reserved</p>
-  </footer>
+            try {
+                const response = await fetch('https://a-itoolnest-backend-5q7nxxo22-downoffs-projects.vercel.app/generate-prompts', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ userInput })
+                });
+
+                const data = await response.json();
+
+                if (data.success && data.prompts.length > 0) {
+                    outputDiv.innerHTML = "<ul>" + data.prompts.map(prompt => `<li>${prompt}</li>`).join('') + "</ul>";
+                } else {
+                    outputDiv.innerHTML = "No prompts found. Please try again!";
+                }
+            } catch (error) {
+                outputDiv.innerHTML = "Error generating prompts. Please try again!";
+            }
+        });
+    </script>
 
 </body>
 </html>
