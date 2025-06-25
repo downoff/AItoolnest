@@ -1,95 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Toolnest.ai - Your AI Tool Hub</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f4f4f9;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-    header {
-      width: 100%;
-      background-color: #2d3b47;
-      color: white;
-      padding: 20px;
-      text-align: center;
-    }
-    .container {
-      padding: 20px;
-      max-width: 800px;
-      width: 100%;
-    }
-    h1, h2 {
-      margin: 0 0 15px;
-    }
-    ul {
-      list-style: none;
-      padding: 0;
-    }
-    li {
-      background: #fff;
-      margin: 10px 0;
-      padding: 15px;
-      border-radius: 5px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    }
-    a {
-      text-decoration: none;
-      color: #007BFF;
-    }
-    footer {
-      margin-top: 40px;
-      padding: 20px;
-      text-align: center;
-      background-color: #2d3b47;
-      color: white;
-      width: 100%;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Tool Nest - The Best AI Tools Directory</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <header class="container">
+        <nav>
+            <ul>
+                <li><strong>AI Tool Nest</strong></li>
+            </ul>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Categories</a></li>
+                <li><a href="#" role="button">Submit a Tool</a></li>
+            </ul>
+        </nav>
+    </header>
 
-  <header>
-    <h1>Toolnest.ai</h1>
-    <p>Your hub for the best AI tools</p>
-  </header>
+    <main class="container">
+        <div id="tools-directory">
+            <input class="search" placeholder="Search for a tool..." />
+            <button class="sort" data-sort="name">Sort by name</button>
 
-  <div class="container">
-    <h2>Featured AI Tools</h2>
-    <ul>
-      <li>
-        <strong>ChatGPT</strong> – An advanced conversational AI by OpenAI.
-        <br>
-        <a href="https://chat.openai.com" target="_blank">Visit ChatGPT</a>
-      </li>
-      <li>
-        <strong>Copy.ai</strong> – AI-powered content generation for marketing and copywriting.
-        <br>
-        <a href="https://www.copy.ai" target="_blank">Visit Copy.ai</a>
-      </li>
-      <li>
-        <strong>Jasper</strong> – AI content assistant for writing blog posts, social media, and more.
-        <br>
-        <a href="https://www.jasper.ai" target="_blank">Visit Jasper</a>
-      </li>
-      <li>
-        <strong>Remove.bg</strong> – Automatically remove image backgrounds using AI.
-        <br>
-        <a href="https://www.remove.bg" target="_blank">Visit Remove.bg</a>
-      </li>
-    </ul>
-  </div>
+            <ul class="list">
+                </ul>
+        </div>
+    </main>
 
-  <footer>
-    <p>&copy; 2025 Toolnest.ai. All Rights Reserved.</p>
-  </footer>
+    <footer class="container">
+        <small>Built with ❤️ by the AI Tool Nest Team</small>
+    </footer>
 
+    <script src="//cdnjs.cloudflare.com/ajax/libs/list.js/2.3.1/list.min.js"></script>
+    <script src="app.js"></script>
 </body>
 </html>
